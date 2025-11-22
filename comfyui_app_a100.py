@@ -57,6 +57,7 @@ for repo, flags in [
     ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
     ("nkchocoai/ComfyUI-SaveImageWithMetaData", {}),
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
+    ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -80,7 +81,7 @@ app = modal.App(name="comfyui", image=image)
 
 @app.function(
     max_containers=1,
-    scaledown_window=300,
+    scaledown_window=600,
     timeout=1800,
     gpu=os.environ.get('MODAL_GPU_TYPE', 'A100-40GB'),
     volumes={DATA_ROOT: vol},
