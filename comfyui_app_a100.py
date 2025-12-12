@@ -44,6 +44,10 @@ image = (
         "comfy --skip-prompt install --nvidia"
     ])
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
+    # dependencies for WanVideoWrapper node
+    .run_commands([
+        "pip install ftfy accelerate einops diffusers sentencepiece"
+    ])
 )
 
 # Install nodes to default ComfyUI location during build
@@ -92,10 +96,8 @@ def ui():
     # Check if volume is empty (first run)
     if not os.path.exists(os.path.join(DATA_BASE, "main.py")):
         print("First run detected. Copying ComfyUI from default location to volume...")
-        
         # Ensure DATA_ROOT exists
         os.makedirs(DATA_ROOT, exist_ok=True)
-        
         # Copy ComfyUI from default location to volume
         if os.path.exists(DEFAULT_COMFY_DIR):
             print(f"Copying {DEFAULT_COMFY_DIR} to {DATA_BASE}")
@@ -103,7 +105,7 @@ def ui():
         else:
             print(f"Warning: {DEFAULT_COMFY_DIR} not found, creating empty structure")
             os.makedirs(DATA_BASE, exist_ok=True)
-    
+
     # Fix detached HEAD and update ComfyUI backend to the latest version
     print("Fixing git branch and updating ComfyUI backend to the latest version...")
     os.chdir(DATA_BASE)
@@ -111,9 +113,9 @@ def ui():
         # Check if in detached HEAD state
         result = subprocess.run("git symbolic-ref HEAD", shell=True, capture_output=True, text=True)
         if result.returncode != 0:
-            print("Detected detached HEAD, checking out main branch...")
-            subprocess.run("git checkout -B main origin/main", shell=True, check=True, capture_output=True, text=True)
-            print("Successfully checked out main branch")
+            print("Detected detached HEAD, checking out master branch...")
+            subprocess.run("git checkout -B master origin/master", shell=True, check=True, capture_output=True, text=True)
+            print("Successfully checked out master branch")
         # Configure pull strategy to fast-forward only
         subprocess.run("git config pull.ff only", shell=True, check=True, capture_output=True, text=True)
         # Perform git pull
@@ -124,7 +126,34 @@ def ui():
     except Exception as e:
         print(f"Unexpected error during backend update: {e}")
 
-    # Update ComfyUI-Manager to the latest version
+    # Define paths for Manager config (use new secure path)
+    manager_config_dir = os.path.join(DATA_BASE, "user", "__manager")
+    manager_config_path = os.path.join(manager_config_dir, "config.ini")
+    legacy_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
+
+    # Migrate from legacy path if it exists
+    if os.path.exists(legacy_dir):
+        print("Migrating Manager data from legacy path to __manager...")
+        os.makedirs(manager_config_dir, exist_ok=True)
+        shutil.copytree(legacy_dir, manager_config_dir, dirs_exist_ok=True)  # Copy contents
+        shutil.rmtree(legacy_dir)  # Delete legacy dir to prevent detection
+        print("Migration completed and legacy dir removed.")
+
+    # Delete any legacy backup to stop persistent notifications
+    backup_dir = os.path.join(manager_config_dir, ".legacy-manager-backup")
+    if os.path.exists(backup_dir):
+        shutil.rmtree(backup_dir)
+        print(f"Removed legacy backup at {backup_dir} to stop notifications")
+
+    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
+    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
+    os.makedirs(manager_config_dir, exist_ok=True)
+    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
+    with open(manager_config_path, "w") as f:
+        f.write(config_content)
+    print(f"Updated {manager_config_path} with security_level=weak, log_to_file=false")
+
+    # Now update ComfyUI-Manager to the latest version (config already set, so should allow)
     manager_dir = os.path.join(CUSTOM_NODES_DIR, "ComfyUI-Manager")
     if os.path.exists(manager_dir):
         print("Updating ComfyUI-Manager to the latest version...")
@@ -174,10 +203,7 @@ def ui():
         try:
             result = subprocess.run(
                 f"/usr/local/bin/python -m pip install -r {requirements_path}",
-                shell=True,
-                check=True,
-                capture_output=True,
-                text=True
+                shell=True, check=True, capture_output=True, text=True
             )
             print("Frontend update output:", result.stdout)
         except subprocess.CalledProcessError as e:
@@ -186,16 +212,6 @@ def ui():
             print(f"Unexpected error during frontend update: {e}")
     else:
         print(f"Warning: {requirements_path} not found, skipping frontend update")
-
-    # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
-    manager_config_dir = os.path.join(DATA_BASE, "user", "default", "ComfyUI-Manager")
-    manager_config_path = os.path.join(manager_config_dir, "config.ini")
-    print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
-    os.makedirs(manager_config_dir, exist_ok=True)
-    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
-    with open(manager_config_path, "w") as f:
-        f.write(config_content)
-    print(f"Updated {manager_config_path} with network_mode=private, security_level=weak, log_to_file=false")
 
     # Ensure all required directories exist
     for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
@@ -230,16 +246,12 @@ def ui():
 
     # Set COMFY_DIR environment variable to volume location
     os.environ["COMFY_DIR"] = DATA_BASE
-    
+
     # Launch ComfyUI from volume location
     print(f"Starting ComfyUI from {DATA_BASE}...")
-    
     # Start ComfyUI server with correct syntax and latest frontend
     cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest"]
     print(f"Executing: {' '.join(cmd)}")
-    
     process = subprocess.Popen(
-        cmd,
-        cwd=DATA_BASE,
-        env=os.environ.copy()
+        cmd, cwd=DATA_BASE, env=os.environ.copy()
     )
