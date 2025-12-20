@@ -213,6 +213,21 @@ def ui():
     else:
         print(f"Warning: {requirements_path} not found, skipping frontend update")
 
+    # Install pip dependencies for new ComfyUI Manager
+    print("Installing pip dependencies for new ComfyUI Manager...")
+    manager_req_path = os.path.join(DATA_BASE, "manager_requirements.txt")
+    if os.path.exists(manager_req_path):
+        try:
+            result = subprocess.run(
+                f"pip install -r {manager_req_path}",
+                shell=True, check=True, capture_output=True, text=True
+            )
+            print("New Manager dependencies installed:", result.stdout)
+        except subprocess.CalledProcessError as e:
+            print(f"Error installing new Manager dependencies: {e.stderr}")
+    else:
+        print(f"Warning: {manager_req_path} not found, skipping new Manager dependencies installation")
+
     # Ensure all required directories exist
     for d in [CUSTOM_NODES_DIR, MODELS_DIR, TMP_DL]:
         os.makedirs(d, exist_ok=True)
@@ -250,7 +265,7 @@ def ui():
     # Launch ComfyUI from volume location
     print(f"Starting ComfyUI from {DATA_BASE}...")
     # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest"]
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
     print(f"Executing: {' '.join(cmd)}")
     process = subprocess.Popen(
         cmd, cwd=DATA_BASE, env=os.environ.copy()
