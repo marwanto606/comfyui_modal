@@ -148,7 +148,7 @@ def ui():
     # Configure ComfyUI-Manager: Disable auto-fetch, set weak security, and disable file logging
     print("Configuring ComfyUI-Manager: Disabling auto-fetch, setting security_level to weak, and disabling file logging...")
     os.makedirs(manager_config_dir, exist_ok=True)
-    config_content = "[default]\nnetwork_mode = private\nsecurity_level = weak\nlog_to_file = false\n"
+    config_content = "[default]\nnetwork_mode = personal_cloud\nsecurity_level = weak\nlog_to_file = false\n"
     with open(manager_config_path, "w") as f:
         f.write(config_content)
     print(f"Updated {manager_config_path} with security_level=weak, log_to_file=false")
