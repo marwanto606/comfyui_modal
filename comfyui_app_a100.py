@@ -34,7 +34,7 @@ import modal
 
 # Build image with ComfyUI installed to default location /root/comfy/ComfyUI
 image = (
-    modal.Image.debian_slim(python_version="3.12")
+    modal.Image.from_registry("python:3.12-slim-bookworm")
     .apt_install("git", "wget", "libgl1-mesa-glx", "libglib2.0-0", "ffmpeg")
     .run_commands([
         "pip install --upgrade pip",
