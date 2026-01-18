@@ -44,9 +44,9 @@ image = (
         "comfy --skip-prompt install --nvidia"
     ])
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
-    # dependencies for WanVideoWrapper node
+    # dependencies install for some nodes
     .run_commands([
-        "pip install ftfy accelerate einops diffusers sentencepiece"
+        "pip install ftfy accelerate einops diffusers sentencepiece sageattention onnx onnxruntime onnxruntime-gpu"
     ])
 )
 
@@ -58,10 +58,10 @@ image = image.run_commands([
 # Git-based nodes baked into image at default ComfyUI location
 for repo, flags in [
     ("ssitu/ComfyUI_UltimateSDUpscale", {'recursive': True}),
-    ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
+    # ("welltop-cn/ComfyUI-TeaCache", {'install_reqs': True}),
     ("nkchocoai/ComfyUI-SaveImageWithMetaData", {}),
     ("receyuki/comfyui-prompt-reader-node", {'recursive': True, 'install_reqs': True}),
-    ("crystian/ComfyUI-Crystools", {'install_reqs': True}),
+    # ("crystian/ComfyUI-Crystools", {'install_reqs': True}), # v1.27.4 conflict
 ]:
     image = image.run_commands([git_clone_cmd(repo, **flags)])
 
@@ -264,8 +264,8 @@ def ui():
 
     # Launch ComfyUI from volume location
     print(f"Starting ComfyUI from {DATA_BASE}...")
-    # Start ComfyUI server with correct syntax and latest frontend
-    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--front-end-version", "Comfy-Org/ComfyUI_frontend@latest", "--enable-manager"]
+    # Start ComfyUI server using frontend comfyui-frontend-package
+    cmd = ["comfy", "launch", "--", "--listen", "0.0.0.0", "--port", "8000", "--enable-manager"]
     print(f"Executing: {' '.join(cmd)}")
     process = subprocess.Popen(
         cmd, cwd=DATA_BASE, env=os.environ.copy()
