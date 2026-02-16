@@ -9,6 +9,7 @@ comfyui using modal.com\
 - hunyuanImage 2.1: https://www.marwanto606.com/2025/09/cara-menjalankan-hunyuanimage-di-comfyui-gpu-modal-dot-com.html
 - flux.2 dev: https://www.marwanto606.com/2025/11/cara-menjalankan-flux2-dev-di-comfyui-gpu-modal-com.html
 - Qwen-Image-2512: https://www.marwanto606.com/2026/01/cara-menjalankan-qwen-image-2512-di-comfyui-gpu-modal-dot-com.html
+- Z-Image: https://www.marwanto606.com/2026/02/cara-menjalankan-z-image-di-comfyui-gpu-modal-dot-com.html
 
 
 ## T2V (Text to Image)
