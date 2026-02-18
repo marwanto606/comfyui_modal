@@ -15,3 +15,6 @@ comfyui using modal.com\
 ## T2V (Text to Image)
 - HunyuanVideo-1.5: https://www.marwanto606.com/2025/11/cara-menjalankan-hunyuanvideo-15-di-comfyui-gpu-modal-com.html
 - LTX-2: https://www.marwanto606.com/2026/01/cara-menjalankan-ltx-2-di-comfyui-gpu-modal-dot-com.html
+
+## T2A (Text to Audio)
+- Ace-Step1.5: https://www.marwanto606.com/2026/02/cara-menjalankan-ace-step15-di-comfyui-gpu-modal-dot-com.html

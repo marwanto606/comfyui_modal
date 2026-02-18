@@ -1,0 +1,723 @@
+{
+  "id": "88ac5dad-efd7-40bb-84fe-fbaefdee1fa9",
+  "revision": 0,
+  "last_node_id": 108,
+  "last_link_id": 260,
+  "nodes": [
+    {
+      "id": 97,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -250.0002551661387,
+        -802.0007900262626
+      ],
+      "size": [
+        513.71875,
+        124
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            247
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            244
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            248
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "models": [
+          {
+            "name": "ace_step_1.5_turbo_aio.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/ace_step_1.5_ComfyUI_files/resolve/main/checkpoints/ace_step_1.5_turbo_aio.safetensors",
+            "directory": "checkpoints"
+          }
+        ],
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "ace_step_1.5_turbo_aio.safetensors"
+      ]
+    },
+    {
+      "id": 94,
+      "type": "TextEncodeAceStepAudio1.5",
+      "pos": [
+        326.1183289002974,
+        -802.0007900262626
+      ],
+      "size": [
+        734.296875,
+        446.99998728032404
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 244
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 257
+        },
+        {
+          "name": "duration",
+          "type": "FLOAT",
+          "widget": {
+            "name": "duration"
+          },
+          "link": 251
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            254,
+            255
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeAceStepAudio1.5",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "Pop punk: pop punk track, girl vocal, \ncatchy electric guitar riffs,\ntight palm-muted rhythm guitar,\ndriving punk rock drums with energetic fills,\npunchy bassline locking with the kick,\nfast but controlled tempo,\nuplifting and energetic mood,\nclean modern production,",
+        "[Intro]\n\n[Verse 1]\nTas kecil\nJaket tipis\nPeta kusut di kantong jeans\nLangkah pelan keluar pintu\nDunia tidur\nAku bangun dulu\n\n[Chorus]\nAku petualang langit malam\nMencari jejak bintang jatuh\nDi antara sunyi dan peluh\nKusimpan rahasia yang kupeluk\nAku petualang langit malam\nTak ada tujuan tertulis\nSelama ada bulan menyala\nAku pulang di antara gelap\n\n[Verse 2]\nLampu rumah tinggal bayang\nJam dinding pelan berperang\nAsap napas jadi kabut\nDi jalan sepi\nHati menyusut\n\n[Chorus]\nAku petualang langit malam\nMencari jejak bintang jatuh\nDi antara sunyi dan peluh\nKusimpan rahasia yang kupeluk\nAku petualang langit malam\nTak ada tujuan tertulis\nSelama ada bulan menyala\nAku pulang di antara gelap\n\n[Bridge]\nKalau besok aku hilang (hey!)\nCari namaku di awan\nSetiap luka yang kau simpan\nKan kubawa jalan-jalan\n\n[Chorus]\nAku petualang langit malam\nMencari jejak bintang jatuh\nDi antara sunyi dan peluh\nKusimpan rahasia yang kupeluk\nAku petualang langit malam\nTak ada tujuan tertulis\nSelama ada bulan menyala\nAku pulang di antara gelap",
+        946430831751852,
+        "randomize",
+        180,
+        200,
+        "4",
+        "id",
+        "E major",
+        true,
+        2,
+        0.85,
+        0.9,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 78,
+      "type": "ModelSamplingAuraFlow",
+      "pos": [
+        1110.8153381505406,
+        -802.0009303130228
+      ],
+      "size": [
+        396,
+        80
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 247
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            175
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingAuraFlow",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        3
+      ]
+    },
+    {
+      "id": 18,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        1557.2151741084895,
+        -802.0007900262626
+      ],
+      "size": [
+        228,
+        72
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 256
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 248
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            260
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecodeAudio",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 98,
+      "type": "EmptyAceStep1.5LatentAudio",
+      "pos": [
+        -166.00054134108552,
+        -178.00114227182837
+      ],
+      "size": [
+        377.875,
+        112
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "seconds"
+          },
+          "link": 250
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            249
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyAceStep1.5LatentAudio",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        200,
+        1
+      ]
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        1117.999002279243,
+        -658.0010601612626
+      ],
+      "size": [
+        395.265625,
+        304
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 175
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 254
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 119
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 249
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 258
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            256
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        946430831751852,
+        "randomize",
+        8,
+        1,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 104,
+      "type": "SaveAudioMP3",
+      "pos": [
+        1816.076863318292,
+        -798.5533130381402
+      ],
+      "size": [
+        660,
+        180
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 260
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveAudioMP3",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        "audio/ComfyUI",
+        "320k"
+      ]
+    },
+    {
+      "id": 99,
+      "type": "PrimitiveNode",
+      "pos": [
+        -166.00054134108552,
+        -562.0009362966156
+      ],
+      "size": [
+        334.765625,
+        83.00002235201407
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "widget": {
+            "name": "seconds"
+          },
+          "links": [
+            250,
+            251
+          ]
+        }
+      ],
+      "title": "Song Duration",
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        200,
+        "fixed"
+      ]
+    },
+    {
+      "id": 47,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        817.99948322655,
+        37.99887338595204
+      ],
+      "size": [
+        244.953125,
+        48
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 255
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            119
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut",
+        "cnr_id": "comfy-core",
+        "ver": "0.11.1",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 102,
+      "type": "PrimitiveNode",
+      "pos": [
+        -166.00054134108552,
+        -346.00120121235545
+      ],
+      "size": [
+        322.078125,
+        82.99998728032392
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "links": [
+            257,
+            258
+          ]
+        }
+      ],
+      "title": "seed",
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        946430831751852,
+        "randomize"
+      ]
+    },
+    {
+      "id": 105,
+      "type": "MarkdownNote",
+      "pos": [
+        -814.0000973107664,
+        -850.0011676037965
+      ],
+      "size": [
+        504,
+        567.078125
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## Model Links (for Local Users)\n\n**checkpoints**\n\n- [ace_step_1.5_turbo_aio.safetensors](https://huggingface.co/Comfy-Org/ace_step_1.5_ComfyUI_files/resolve/main/checkpoints/ace_step_1.5_turbo_aio.safetensors)\n\n\n## Model Storage Location\n\n```\n📂 ComfyUI/\n├── 📂 models/\n│   └── 📂 checkpoints/\n│       └── ace_step_1.5_turbo_aio.safetensors\n```\n\n## Report Issue\n\nNote: Please update ComfyUI first ([guide](https://docs.comfy.org/zh-CN/installation/update_comfyui)) and prepare required models. Desktop/Cloud ship stable builds; nightly-supported models may not be included yet, please wait for the next stable release.\n\n- Cannot run / runtime errors: [ComfyUI/issues](https://github.com/comfyanonymous/ComfyUI/issues)\n- UI / frontend issues: [ComfyUI_frontend/issues](https://github.com/Comfy-Org/ComfyUI_frontend/issues)\n- Workflow issues: [workflow_templates/issues](https://github.com/Comfy-Org/workflow_templates/issues)\n"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      119,
+      47,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      175,
+      78,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      244,
+      97,
+      1,
+      94,
+      0,
+      "CLIP"
+    ],
+    [
+      247,
+      97,
+      0,
+      78,
+      0,
+      "MODEL"
+    ],
+    [
+      248,
+      97,
+      2,
+      18,
+      1,
+      "VAE"
+    ],
+    [
+      249,
+      98,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      250,
+      99,
+      0,
+      98,
+      0,
+      "FLOAT"
+    ],
+    [
+      251,
+      99,
+      0,
+      94,
+      2,
+      "FLOAT"
+    ],
+    [
+      254,
+      94,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      255,
+      94,
+      0,
+      47,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      256,
+      3,
+      0,
+      18,
+      0,
+      "LATENT"
+    ],
+    [
+      257,
+      102,
+      0,
+      94,
+      1,
+      "INT"
+    ],
+    [
+      258,
+      102,
+      0,
+      3,
+      4,
+      "INT"
+    ],
+    [
+      260,
+      18,
+      0,
+      104,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Step 1 - Load Model",
+      "bounding": [
+        -262,
+        -886,
+        537.71875,
+        217.92
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Step 2 - Duration",
+      "bounding": [
+        -262,
+        -646,
+        540,
+        204
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Step 3 - Prompt",
+      "bounding": [
+        314,
+        -886,
+        768,
+        984
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8701484897118043,
+      "offset": [
+        204.1781802573504,
+        1028.7661581387022
+      ]
+    },
+    "frontendVersion": "1.38.14",
+    "workflowRendererVersion": "Vue",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
