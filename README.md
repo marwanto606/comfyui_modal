@@ -11,6 +11,7 @@ comfyui using modal.com\
 - Qwen-Image-2512: https://www.marwanto606.com/2026/01/cara-menjalankan-qwen-image-2512-di-comfyui-gpu-modal-dot-com.html
 - Z-Image: https://www.marwanto606.com/2026/02/cara-menjalankan-z-image-di-comfyui-gpu-modal-dot-com.html
 - Ideogram 4: https://www.marwanto606.com/2026/06/cara-menjalankan-ideogram-4-di-comfyui-gpu-modal-dot-com.html
+- Boogu-Image 0.1: https://www.marwanto606.com/2026/06/cara-menjalankan-boogu-image-01-di-comfyui-gpu-modal-dot-com.html
 
 
 ## T2V (Text to Image)
