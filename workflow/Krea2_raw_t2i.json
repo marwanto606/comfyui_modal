@@ -1,0 +1,459 @@
+{
+  "id": "163ec137-2b5c-4530-a8fb-acc942d50362",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 29,
+  "nodes": [
+    {
+      "id": 13,
+      "type": "CLIPLoader",
+      "pos": [
+        -239.70036637591437,
+        452.2730542698175
+      ],
+      "size": [
+        383,
+        140.359375
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            14,
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_4b_fp8_scaled.safetensors",
+        "krea2",
+        "default"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        -242.67764590145026,
+        278.93821649874985
+      ],
+      "size": [
+        390.25,
+        116.375
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "krea2_raw_fp8_scaled.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "EmptyLatentImage",
+      "pos": [
+        204.22001676999847,
+        781.5925020404252
+      ],
+      "size": [
+        270,
+        144
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1280,
+        720,
+        4
+      ]
+    },
+    {
+      "id": 3,
+      "type": "VAEDecode",
+      "pos": [
+        624.3418354659634,
+        280.85869022575207
+      ],
+      "size": [
+        283.734375,
+        78.984375
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 29
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 2,
+      "type": "KSampler",
+      "pos": [
+        626.7026547290394,
+        439.84488283178945
+      ],
+      "size": [
+        290.96875,
+        339.3125
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 25
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 26
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 27
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        482079154717710,
+        "randomize",
+        20,
+        3.5,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        186.9175566959259,
+        265.1413169788658
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A charming and adorable digital illustration of a happy black kitten with oversized, expressive, sparkling eyes and a joyful open-mouthed expression. A minimalist black speech bubble with a pink heart inside floats above its head. Soft, solid pastel pink background, clean vector-style lines, high quality, minimalist kawaii aesthetic, vibrant and cheerful."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 4,
+      "type": "VAELoader",
+      "pos": [
+        -236.94722355843965,
+        642.24918975596
+      ],
+      "size": [
+        383.265625,
+        110.75
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "SaveImage",
+      "pos": [
+        964.4581982643061,
+        297.97923624001766
+      ],
+      "size": [
+        525.171875,
+        609.1875
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "krea2"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "MarkdownNote",
+      "pos": [
+        -806.7806551776415,
+        277.1627369065744
+      ],
+      "size": [
+        499.125,
+        580.453125
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Model Links",
+      "properties": {},
+      "widgets_values": [
+        "## Model Links (for Local Users)\n\nFor BF16 and NVFP4 variants, see [Comfy-Org/Krea-2](https://huggingface.co/Comfy-Org/Krea-2)\n\n\n**diffusion_models**\n\n- [krea2_raw_fp8_scaled.safetensors](https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_raw_fp8_scaled.safetensors)\n\n**text_encoders**\n\n- [qwen3vl_4b_fp8_scaled.safetensors](https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors)\n\n**vae**\n\n- [qwen_image_vae.safetensors](https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors)\n\n## Model Storage Location\n\n```\n📂 ComfyUI/\n├── 📂 models/\n│   ├── 📂 diffusion_models/\n│   │   └── krea2_raw_fp8_scaled.safetensors\n│   ├── 📂 text_encoders/\n│   │   └── qwen3vl_4b_fp8_scaled.safetensors\n│   ├── 📂 vae/\n│   │   └── qwen_image_vae.safetensors\n```"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 17,
+      "type": "CLIPTextEncode",
+      "pos": [
+        187.06939039840768,
+        512.9661761110298
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode (Negative)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "blurry, low resolution, bad anatomy, deformed hands, extra digits, watermark, signature"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      3,
+      4,
+      0,
+      3,
+      1,
+      "VAE"
+    ],
+    [
+      14,
+      13,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      15,
+      3,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      13,
+      0,
+      17,
+      0,
+      "CLIP"
+    ],
+    [
+      25,
+      1,
+      0,
+      2,
+      0,
+      "MODEL"
+    ],
+    [
+      26,
+      6,
+      0,
+      2,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      17,
+      0,
+      2,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      28,
+      10,
+      0,
+      2,
+      3,
+      "LATENT"
+    ],
+    [
+      29,
+      2,
+      0,
+      3,
+      0,
+      "LATENT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7150338818826073,
+      "offset": [
+        1087.5081349392042,
+        -48.49532359730087
+      ]
+    },
+    "frontendVersion": "1.45.19"
+  },
+  "version": 0.4
+}
