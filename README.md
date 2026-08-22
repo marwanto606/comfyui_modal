@@ -3,6 +3,7 @@ comfyui using modal.com\
 [![Open In Colabb](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/marwanto606/comfyui_modal/blob/main/comfyui_modal.ipynb)
 
 - Tutorial Install Comfyui: https://www.marwanto606.com/2025/05/cara-menjalankan-comfyui-di-modal-dot-com.html
+- Image builder version di https://modal.com/settings/image-config atur ke 2025.06
 
 ## T2I (Text to Image)
 - cosmos predict2: https://www.marwanto606.com/2025/06/cara-menjalankan-nvidia-cosmos-predict2-di-comfyui-modal-dot-com.html
