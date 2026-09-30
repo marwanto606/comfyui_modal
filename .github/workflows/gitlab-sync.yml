@@ -1,4 +1,4 @@
-name: Sync to GitLab
+name: Sync to GitLab and Codeberg
 
 on:
   push:
@@ -12,18 +12,24 @@ jobs:
 
     steps:
       - name: Checkout GitHub repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Add GitLab remote
+      - name: Sync to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
         run: |
-          git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@${{ secrets.GITLAB_REPO }}
-
-      - name: Push all branches
-        run: |
-          git push gitlab --all
-
-      - name: Push all tags
-        run: |
+          git remote add gitlab "https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO}"
+          git push gitlab "${GITHUB_REF_NAME}"
           git push gitlab --tags
+
+      - name: Sync to Codeberg
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+          CODEBERG_REPO: ${{ secrets.CODEBERG_REPO }}
+        run: |
+          git remote add codeberg "https://oauth2:${CODEBERG_TOKEN}@${CODEBERG_REPO}"
+          git push codeberg "${GITHUB_REF_NAME}"
+          git push codeberg --tags
